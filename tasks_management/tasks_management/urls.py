@@ -21,10 +21,10 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include('tasks.urls')),      # explication de why 'api/' est dans ficher word de ce project
+    path('admin/', admin.site.urls),        # This route provides access to the Django admin interface
+    path('api/', include('tasks.urls')),      # This includes the tasks.urls module, where you would define all the URL patterns for the tasks app
 
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),   # These paths provide token-based authentication using django-rest-framework-simplejwt
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     
 ]

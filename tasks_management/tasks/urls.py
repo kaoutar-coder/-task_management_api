@@ -1,12 +1,13 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import TaskViewSet, UserViewSet
+from .views import TaskViewSet, UserViewSet, UserRegistrationView
 
 router = DefaultRouter()
 router.register(r'tasks', TaskViewSet, basename='task')
-router.register(r'users', UserViewSet, basename='user') #Ajoutez les routes pour les utilisateurs
+router.register(r'users', UserViewSet, basename='user')  # Ajoutez les routes pour les utilisateurs
 
 urlpatterns = [
+    path('api/register/', UserRegistrationView.as_view(), name='register'),
     path('', include(router.urls)),
 ]
 
