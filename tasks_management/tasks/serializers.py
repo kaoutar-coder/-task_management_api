@@ -4,10 +4,22 @@ from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 
 # Task Serializer
+
+# Define the TaskSerializer class properly
 class TaskSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Task
-        fields = '__all__'  # Replace with explicit fields if necessary
+        fields = ['id', 'title', 'description', 'is_completed', 'created_at', 'updated_at']
+        read_only_fields = ['id', 'created_at', 'updated_at', 'owner']
+
+    def create(self, validated_data):
+        validated_data['owner'] = self.context['request'].user
+        return super().create(validated_data)
+
+
+
+
 
 # User Serializer
 class UserSerializer(serializers.ModelSerializer):
